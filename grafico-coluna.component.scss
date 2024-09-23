@@ -1,0 +1,36 @@
+@use "./../../../../../../src/cores.scss" as *;
+
+.chart {
+    width: 100%;
+    height: 400px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 3%;
+  }
+  
+  .grid-lines line {
+    stroke: #ddd;
+  }
+  
+  .bars rect {
+    transition: fill 0.3s ease;
+  }
+  
+  .bars rect:hover {
+    fill: $oab-light;
+  }
+  
+  .bars .bar-value {
+    opacity: 0;  /* Esconder os valores por padrão */
+    transition: opacity 0.3s ease;  /* Suave transição ao aparecer */
+  }
+  
+  .bars .bar-group:hover .bar-value {
+    opacity: 1;  /* Mostrar os valores ao passar o mouse na barra */
+  }
+  
+  .bars .bar-group:hover .bar {
+    fill: $oab-light;  /* Alterar a cor da barra ao passar o mouse */
+  }
+  

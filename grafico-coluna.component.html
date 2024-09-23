@@ -1,0 +1,79 @@
+<div class="graficoBarras">
+    <svg
+      class="chart"
+      viewBox="0 0 200 110"
+      preserveAspectRatio="xMinYMin meet"
+    >
+      <!-- Linhas de Grade -->
+      <g class="grid-lines">
+        <line
+          *ngFor="let line of gridLines"
+          [attr.y1]="line.y"
+          [attr.y2]="line.y"
+          x1="10"
+          x2="190"
+          stroke="#ccc"
+          stroke-width="0.5"
+        />
+      </g>
+
+      <!-- Valores no Eixo Y -->
+      <g class="y-axis-labels">
+        <text
+          *ngFor="let line of gridLines"
+          [attr.x]="5"
+          [attr.y]="line.y + 2"
+          text-anchor="end"
+          fill="#000"
+          font-size="4"
+          alignment-baseline="middle"
+        >
+          {{ line.label }}
+        </text>
+      </g>
+
+      <!-- Barras do Gráfico -->
+      <g class="bars">
+        <g *ngFor="let data of chartData; let i = index" class="bar-group">
+          <!-- Barra -->
+          <rect
+            [attr.x]="i * (180 / chartData.length) + 10"
+            [attr.y]="100 - (data.value / maxValue) * 100"
+            [attr.width]="180 / chartData.length - 5"
+            [attr.height]="(data.value / maxValue) * 100"
+            fill="#233756"
+            class="bar"
+          ></rect>
+
+          <!-- Valor sobre a Barra (inicialmente escondido) -->
+          <text
+            [attr.x]="
+              i * (180 / chartData.length) + 10 + 180 / chartData.length / 2
+            "
+            [attr.y]="100 - (data.value / maxValue) * 100 - 2"
+            text-anchor="middle"
+            fill="#000"
+            font-size="4"
+            alignment-baseline="middle"
+            class="bar-value"
+          >
+            {{ data.value }}
+          </text>
+
+          <!-- Rótulo do eixo X (abaixo da barra) -->
+          <text
+            [attr.x]="
+              i * (180 / chartData.length) + 10 + 180 / chartData.length / 2
+            "
+            [attr.y]="105"
+            text-anchor="middle"
+            fill="#000"
+            font-size="4"
+            alignment-baseline="middle"
+          >
+            {{ data.label }}
+          </text>
+        </g>
+      </g>
+    </svg>
+  </div>
